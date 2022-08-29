@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Arivali_Excel</string>
+    <string name="login_here">Login Here</string>
+    <string name="enter_email">enter email</string>
+    <string name="enter_password">enter password</string>
+    <string name="login">Login</string>
+    <string name="excel_data">Excel Data</string>
+    <string name="click_here_to_upload_an_excel_sheet">Click here to upload an excel sheet</string>
+    <string name="data_inserted">Data Inserted</string>
+    <string name="all_data_inserted_successful_into_local_database">All Data inserted successful into local Database</string>
+    <string name="go_back">Go back</string>
+    <string name="show_data">Show Data</string>
+    <string name="excel_sheet">sheet</string>
+    <string name="upload_excel_sheet">upload</string>
+    <string name="search">Search</string>
+    <string name="logout">logout</string>
+</resources>
