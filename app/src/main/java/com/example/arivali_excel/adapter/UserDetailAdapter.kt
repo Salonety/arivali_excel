@@ -47,7 +47,7 @@ class UserDetailAdapter : RecyclerView.Adapter<UserDetailAdapter.MyViewHolder>()
             holder.binding.tvStatus.isEnabled = true
             with(holder) {
                 binding.tvStatus.setBackgroundColor(
-                        binding.tvStatus.getResources().getColor(R.color.bg_color)
+                        binding.tvStatus.resources.getColor(R.color.bg_color)
                     )
             }
         }

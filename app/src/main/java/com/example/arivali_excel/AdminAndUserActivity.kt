@@ -2,10 +2,12 @@ package com.example.arivali_excel
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.SearchView
@@ -104,7 +106,7 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
         userDetailAdapter.itemClickListener {
             viewModel.updateStudent(Student(it.id, it.name, it.gender, it.city, "Active"))
             Toast.makeText(this, "${it.name} Updated Active", Toast.LENGTH_SHORT).show()
-            binding.progressbar.visibility = View.VISIBLE
+           // binding.progressbar.visibility = View.VISIBLE
             finish()
             startActivity(intent)
 
@@ -121,7 +123,6 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
         val search = menu.findItem(R.id.menu_search)
         val searchView = search?.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true
-        // here you get error but don't worry
         searchView?.setOnQueryTextListener(this)
         return true
     }
@@ -224,13 +225,11 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
             }
         }
 
+
     }
 
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-
-     return true
-    }
+    override fun onQueryTextSubmit(query: String?): Boolean { return true }
 
     override fun onQueryTextChange(newText: String?): Boolean {
         searchDatabase(query)
@@ -252,9 +251,23 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
 
     override fun onBackPressed() {
         moveTaskToBack(true)
+
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.id.menu_search){
 
+        }
+        if (item.itemId == R.id.menu_logout) {
+            val intent = Intent(this@AdminAndUserActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+            return true
+
+        }
+        return true
+
+    }
 
 }
 

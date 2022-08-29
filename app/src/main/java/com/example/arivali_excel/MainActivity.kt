@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.arivali_excel.Util.Constant.SHARED_PREF
 import com.example.arivali_excel.Util.Constant.USER_TYPE
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private var check: Boolean = true
     private var userList: MutableList<User>? = null
     private lateinit var sharedPreferences: SharedPreferences
-    lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +30,11 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(LoginViewModel::class.java)
+        )[LoginViewModel::class.java]
 
         sharedPreferences = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
 
-        userList = mutableListOf<User>()
+        userList = mutableListOf()
         userList?.add(User(0, "saloni11@gmail.com", "1234", "admin"))
 
         userList?.add(User(0, "saloni12@gmail.com", "12345", "user"))
@@ -58,15 +57,15 @@ class MainActivity : AppCompatActivity() {
             val password: String = binding.etPassword.text.toString()
 
             if (email.isEmpty()) {
-                binding.etEmail.setError("Enter Email")
+                binding.etEmail.error = "Enter Email"
                 binding.etEmail.requestFocus()
                 return@setOnClickListener
             } else if (password.isEmpty()) {
-                binding.etPassword.setError("Enter Password")
+                binding.etPassword.error = "Enter Password"
                 binding.etPassword.requestFocus()
                 return@setOnClickListener
             } else {
-                viewModel.getUser(email, password).observe(this, Observer {
+                viewModel.getUser(email, password).observe(this) {
                     if (it != null) {
                         val intent = Intent(this, AdminAndUserActivity::class.java)
                         intent.putExtra(USER_TYPE, it.userType)
@@ -78,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                })
+                }
             }
         }
 
@@ -86,7 +85,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun insertUser(user: MutableList<User>) {
         viewModel.insertUsers(user)
     }
+
 }

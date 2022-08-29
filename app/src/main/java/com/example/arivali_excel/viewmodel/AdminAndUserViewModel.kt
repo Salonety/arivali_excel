@@ -1,7 +1,7 @@
 package com.example.arivali_excel.viewmodel
 
 import android.app.Application
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -12,7 +12,7 @@ import com.example.arivali_excel.repository.StudentRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AdminAndUserViewModel @ViewModelInject constructor(application: Application): AndroidViewModel(application) {
+class AdminAndUserViewModel  constructor(application: Application): AndroidViewModel(application) {
 
     var allStudent : LiveData<List<Student>>
     private val repository: StudentRepository
