@@ -31,8 +31,6 @@ class AdminAndUserViewModel  constructor(application: Application): AndroidViewM
         repository.upDateStudent(student)
     }
 
-    fun searchDatabase(searchQuery: String): LiveData<List<Student>> {
-        return repository.searchDatabase(searchQuery).asLiveData()
-    }
+
 
 }

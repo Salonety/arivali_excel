@@ -19,9 +19,8 @@ class StudentRepository @Inject constructor(private val studentDao: StudentDao) 
 
     suspend fun upDateStudent(student: Student) {
         studentDao.updateStudent(student)
+
     }
-    fun searchDatabase(searchQuery: String): Flow<List<Student>> {
-        return studentDao.searchDatabase(searchQuery)
-    }
+
 
 }

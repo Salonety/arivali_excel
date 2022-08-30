@@ -22,4 +22,5 @@ interface StudentDao {
     @Query("SELECT * FROM student WHERE name LIKE :searchQuery OR city LIKE :searchQuery" )
     fun searchDatabase(searchQuery: String): Flow<List<Student>>
 
+
 }

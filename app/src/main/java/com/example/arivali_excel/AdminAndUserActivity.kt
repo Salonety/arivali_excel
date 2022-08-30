@@ -104,14 +104,15 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
         }
 
         userDetailAdapter.itemClickListener {
+
             viewModel.updateStudent(Student(it.id, it.name, it.gender, it.city, "Active"))
-            Toast.makeText(this, "${it.name} Updated Active", Toast.LENGTH_SHORT).show()
-           // binding.progressbar.visibility = View.VISIBLE
+            Toast.makeText(this, "${it.name} Updated Active", Toast.LENGTH_SHORT,).show()
+           //binding.progressbar.visibility = View.VISIBLE
             finish()
             startActivity(intent)
 
         }
-        
+
 
 
     }
@@ -121,9 +122,11 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
         menuInflater.inflate(R.menu.menu, menu)
 
         val search = menu.findItem(R.id.menu_search)
+
         val searchView = search?.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
+
         return true
     }
     private fun readExcelFile() {
@@ -222,6 +225,7 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
                 }
 
 
+
             }
         }
 
@@ -229,25 +233,9 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
     }
 
 
-    override fun onQueryTextSubmit(query: String?): Boolean { return true }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        searchDatabase(query)
-        return true
-
-    }
 
 
-    private fun searchDatabase(query: String) {
-        val searchQuery = "%$query%"
 
-        viewModel.searchDatabase(searchQuery).observe(this) { list ->
-            list.let {
-                studentList?.addAll(it)
-            }
-        }
-
-    }
 
     override fun onBackPressed() {
         moveTaskToBack(true)
@@ -255,9 +243,7 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.menu_search){
 
-        }
         if (item.itemId == R.id.menu_logout) {
             val intent = Intent(this@AdminAndUserActivity, MainActivity::class.java)
             startActivity(intent)
@@ -269,5 +255,15 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
 
     }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        TODO("Not yet implemented")
+    }
+
 }
+
+
 
