@@ -1,6 +1,7 @@
 package com.example.arivali_excel.repository
 
 
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.arivali_excel.database.Student
 import com.example.arivali_excel.database.StudentDao
@@ -21,6 +22,9 @@ class StudentRepository @Inject constructor(private val studentDao: StudentDao) 
         studentDao.updateStudent(student)
 
     }
-
+    @WorkerThread
+    fun search(name : String) : LiveData<List<Student>>{
+        return studentDao.getSearchResults(name)
+    }
 
 }

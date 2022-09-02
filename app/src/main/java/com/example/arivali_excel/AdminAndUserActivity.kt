@@ -31,9 +31,8 @@ import jxl.read.biff.BiffException
 import java.io.File
 import java.io.IOException
 
-class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class AdminAndUserActivity : AppCompatActivity() {
 
-    private lateinit var query: String
     private val userDetailAdapter = UserDetailAdapter()
     private lateinit var sharedPreferences: SharedPreferences
     private var isInsert: Boolean = false
@@ -48,6 +47,9 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
     private var city: String? = null
     private var status: String? = null
     private lateinit var dialog: Dialog
+    private lateinit var searchView: SearchView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +59,13 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
 
 
 
+
         dialog = Dialog(this)
         sharedPreferences = this.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
         viewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         )[AdminAndUserViewModel::class.java]
-
 
         binding.progressbar.visibility = View.GONE
         studentList = mutableListOf()
@@ -106,29 +108,17 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
         userDetailAdapter.itemClickListener {
 
             viewModel.updateStudent(Student(it.id, it.name, it.gender, it.city, "Active"))
-            Toast.makeText(this, "${it.name} Updated Active", Toast.LENGTH_SHORT,).show()
-           //binding.progressbar.visibility = View.VISIBLE
+            Toast.makeText(this, "${it.name} Updated Active", Toast.LENGTH_SHORT).show()
+            //binding.progressbar.visibility = View.VISIBLE
             finish()
             startActivity(intent)
 
         }
 
 
-
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-
-        val search = menu.findItem(R.id.menu_search)
-
-        val searchView = search?.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
-
-        return true
-    }
     private fun readExcelFile() {
         client = AsyncHttpClient()
         client[EXCELSHEET_URL, object : FileAsyncHttpResponseHandler(this) {
@@ -183,8 +173,6 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
     }
 
 
-
-
     private fun insertStudentData(mutableList: MutableList<Student>) {
         viewModel.insertStudent(mutableList)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
@@ -225,16 +213,11 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
                 }
 
 
-
             }
         }
 
 
     }
-
-
-
-
 
 
     override fun onBackPressed() {
@@ -255,15 +238,51 @@ class AdminAndUserActivity : AppCompatActivity(), SearchView.OnQueryTextListener
 
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        TODO("Not yet implemented")
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        val search = menu.findItem(R.id.searchItems)
+        searchView = search.actionView as SearchView
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(object:
+        SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    getItemsFromDb(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    getItemsFromDb(newText)
+                }
+                return true
+            }
+
+        })
+        return super.onCreateOptionsMenu(menu)
+
+
     }
 
-    override fun onQueryTextChange(newText: String?): Boolean {
-        TODO("Not yet implemented")
+    private fun getItemsFromDb(searchText: String) {
+        var searchText = searchText
+        searchText = "%$searchText%"
+        viewModel.searchForItems(name = searchText).observe(this@AdminAndUserActivity, { list ->
+            list?.let {
+                Log.e("List = ", list.toString())
+            }
+
+        })
+                    viewModel.allStudent
     }
 
-}
+    }
+
+
+
+
 
 
 

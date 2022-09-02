@@ -30,7 +30,9 @@ class AdminAndUserViewModel  constructor(application: Application): AndroidViewM
     fun updateStudent(student: Student) = viewModelScope.launch(Dispatchers.IO) {
         repository.upDateStudent(student)
     }
-
+    fun searchForItems(name: String) : LiveData<List<Student>> {
+        return repository.search(name)
+    }
 
 
 }
