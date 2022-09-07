@@ -9,10 +9,11 @@ import com.example.arivali_excel.database.Student
 
 import com.example.arivali_excel.databinding.UserDetailItemBinding
 
+@Suppress("DEPRECATION")
 class UserDetailAdapter : RecyclerView.Adapter<UserDetailAdapter.MyViewHolder>() {
 
     private var listener: ((Student) -> Unit)? = null
-    var list = mutableListOf<Student>()
+    private var list = mutableListOf<Student>()
     private var userType: String? = null
 
     @SuppressLint("NotifyDataSetChanged")
@@ -58,11 +59,17 @@ class UserDetailAdapter : RecyclerView.Adapter<UserDetailAdapter.MyViewHolder>()
             }
         }
 
+
     }
 
     override fun getItemCount(): Int {
         return this.list.size
 
+    }
+
+    fun setData(newData: List<Student>){
+        list= newData as MutableList<Student>
+        notifyDataSetChanged()
     }
 
 }

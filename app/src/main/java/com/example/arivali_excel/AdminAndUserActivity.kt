@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.example.arivali_excel
 
 import android.app.Dialog
@@ -56,8 +58,8 @@ class AdminAndUserActivity : AppCompatActivity() {
         binding = ActivityAdminAndUserBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-
+        binding.rvExcelData.layoutManager = LinearLayoutManager(this)
+        binding.rvExcelData.adapter = userDetailAdapter
 
 
         dialog = Dialog(this)
@@ -107,13 +109,16 @@ class AdminAndUserActivity : AppCompatActivity() {
 
         userDetailAdapter.itemClickListener {
 
-            viewModel.updateStudent(Student(it.id, it.name, it.gender, it.city, "Active"))
-            Toast.makeText(this, "${it.name} Updated Active", Toast.LENGTH_SHORT).show()
-            //binding.progressbar.visibility = View.VISIBLE
-            finish()
-            startActivity(intent)
+              viewModel.updateStudent(Student(it.id, it.name, it.gender, it.city, "Active"))
+              Toast.makeText(this, "${it.name} Updated Active", Toast.LENGTH_SHORT).show()
+              //binding.progressbar.visibility = View.VISIBLE
+              finish()
+              startActivity(intent)
+
+
 
         }
+
 
 
     }
@@ -238,9 +243,10 @@ class AdminAndUserActivity : AppCompatActivity() {
 
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu, menu)
+        menuInflater.inflate(R.menu.menu, menu)
+
         val search = menu.findItem(R.id.searchItems)
         searchView = search.actionView as SearchView
         searchView.isSubmitButtonEnabled = true
@@ -264,18 +270,21 @@ class AdminAndUserActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
 
 
+
     }
 
     private fun getItemsFromDb(searchText: String) {
         var searchText = searchText
         searchText = "%$searchText%"
-        viewModel.searchForItems(name = searchText).observe(this@AdminAndUserActivity, { list ->
+        viewModel.searchForItems(name = searchText).observe(this@AdminAndUserActivity) { list ->
             list?.let {
+              userDetailAdapter.setData(it)
                 Log.e("List = ", list.toString())
             }
 
-        })
-                    viewModel.allStudent
+        }
+
+        viewModel.allStudent
     }
 
     }

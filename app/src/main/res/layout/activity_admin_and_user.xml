@@ -20,7 +20,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_alignParentTop="true"
-            />
+            tools:ignore="ContentDescription" />
 
         <View
             android:id="@+id/view1"
