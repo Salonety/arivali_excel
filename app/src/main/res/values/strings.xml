@@ -14,4 +14,5 @@
     <string name="upload_excel_sheet">upload</string>
     <string name="search">Search</string>
     <string name="logout">logout</string>
+    <string name="all_data_inserted_successfully_into_local_database">Data Succesfully inserted</string>
 </resources>

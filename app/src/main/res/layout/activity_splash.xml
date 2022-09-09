@@ -27,6 +27,10 @@
         android:layout_below="@+id/idIVLogo"
         android:layout_marginStart="137dp"
         android:text="Arivali"
+        android:shadowColor="#E7E50C"
+        android:shadowDx="12"
+        android:shadowDy="12"
+        android:shadowRadius="8"
         android:fontFamily="cursive"
         android:textSize="48sp" />
 

@@ -4,10 +4,12 @@
 
     <item android:id="@+id/searchItems"
         android:title="@string/search"
+        android:typeface="sans"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_search_24"
         app:actionViewClass="android.widget.SearchView"/>
     <item android:id="@+id/menu_logout"
+        android:typeface="sans"
         android:title="@string/logout"
 
         />

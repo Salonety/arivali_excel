@@ -9,6 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/data_inserted"
+        android:typeface="sans"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,8 +26,9 @@
         android:textSize="14sp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
+        android:typeface="sans"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:text="@string/all_data_inserted_successful_into_local_database"
+        android:text="@string/all_data_inserted_successfully_into_local_database"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16sp"/>
@@ -52,6 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img"
         android:layout_marginTop="24dp"
+        android:typeface="sans"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="8dp"/>
     <Button
@@ -65,6 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img"
         android:layout_marginTop="24dp"
+        android:typeface="sans"
         android:layout_marginEnd="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

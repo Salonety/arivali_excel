@@ -9,23 +9,39 @@
             type="com.example.arivali_excel.database.Student" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{student.name}"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:typeface="sans"
+            android:singleLine="true"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_gender"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="4dp"/>
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginBottom="6dp"
+            android:shadowColor="#CCCDCD80"
+            android:shadowDx="12"
+            android:shadowDy="12"
+            android:shadowRadius="8"
+            android:background="@drawable/edt_back"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+
+
+            />
         <TextView
             android:id="@+id/tv_gender"
             android:layout_width="0dp"
@@ -33,12 +49,15 @@
             android:text="@{student.gender}"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:singleLine="true"
+            android:typeface="sans"
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="@id/tv_name"
             app:layout_constraintBottom_toBottomOf="@id/tv_name"
             app:layout_constraintStart_toEndOf="@id/tv_name"
             app:layout_constraintEnd_toStartOf="@id/tv_city"
-            android:layout_marginStart="4dp"/>
+            android:layout_marginStart="6dp"
+            android:background="@drawable/edt_back"/>
 
         <TextView
             android:id="@+id/tv_city"
@@ -48,24 +67,32 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textAlignment="center"
+            android:singleLine="true"
+            android:typeface="sans"
             app:layout_constraintTop_toTopOf="@id/tv_gender"
             app:layout_constraintBottom_toBottomOf="@id/tv_gender"
             app:layout_constraintStart_toEndOf="@id/tv_gender"
             app:layout_constraintEnd_toStartOf="@+id/tv_status"
-            android:layout_marginStart="4dp"/>
+            android:layout_marginStart="6dp"
+            android:background="@drawable/edt_back"/>
         <TextView
             android:id="@+id/tv_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{student.status}"
             android:textColor="@color/black"
+            android:singleLine="true"
             android:textSize="14sp"
+            android:typeface="sans"
+            android:textStyle="bold"
             android:textAlignment="center"
+            android:layout_marginEnd="6dp"
             app:layout_constraintStart_toEndOf="@+id/tv_city"
             app:layout_constraintTop_toTopOf="@id/tv_gender"
             app:layout_constraintBottom_toBottomOf="@id/tv_gender"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="4dp"/>
+            android:layout_marginStart="6dp"
+            android:background="@drawable/edt_back"/>
         <View
             app:layout_constraintTop_toBottomOf="@id/tv_name"
             android:layout_marginTop="2dp"
